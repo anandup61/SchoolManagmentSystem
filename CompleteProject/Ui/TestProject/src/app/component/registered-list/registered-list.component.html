@@ -1,0 +1,93 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Student Name</th>
+      <th scope="col">DOB</th>
+      <th scope="col">Gender</th>
+      <th scope="col">TeacherName</th>
+
+      <th scope="col">
+        <!-- Button trigger modal -->
+        <button style="margin-left: 40% ;" type="button" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+          New Contact
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="center">
+                  <form class="row g-3" [formGroup]="formRegister" (ngSubmit)="onSave()">
+                    <div class="col-md-6">
+                      <label for="inputEmail4" class="form-label">First Name</label>
+                      <input type="text" class="form-control" formControlName="firstName" id="inputEmail4">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputPassword4" class="form-label">Last Name</label>
+                      <input type="text" class="form-control" formControlName="lastName" id="inputPassword4">
+                    </div>
+                    <div class="col-12">
+                      <label for="inputAddress" class="form-label">DOB</label>
+                      <input type="text" class="form-control" id="inputAddress" formControlName="dob">
+                    </div>
+
+
+                    <div class="col-md-4">
+                      <label for="inputState" class="form-label">Gender</label>
+                      <select id="inputState" formControlName="gender" class="form-select">
+                        <option selected value="1">Male</option>
+                        <option value="2">Female</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputSelectTeacher" class="form-label">Select Teacher</label>
+                      <select id="inputSelectTeacher" formControlName="selectTeacher" class="form-select">
+                        <option selected value="0">select</option>
+                        <option *ngFor="let x of teacherList" value={{x.id}}>{{x.firstName+""+x.lastName}}</option>
+                      </select>
+                    </div>
+
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Sign in</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let x of studentList" >
+      
+      <td>{{x.id}}</td>
+      <td>{{x.name}}</td>
+      <td>{{x.dob}}</td>
+      <td>{{x.gender}}</td>
+      <td>{{x.teacherName}}</td>
+      
+      <th scope="col">
+        <!-- <button  class="btn btn-primary" (click)="editMember(x.id)">Edit</button> -->
+        <button style="margin-left: 40% ;" (click)="editMember(x.id)" type="button" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        Edit
+      </button>
+      </th>
+      <th scope="col"><button  class="btn btn-danger" (click)="deleteMember(x.id)">Delete</button></th>
+
+
+    </tr>
+   
+  </tbody>
+</table>
